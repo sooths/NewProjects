@@ -8,7 +8,7 @@ public class Scenario1 extends Reusable_Annotations {
         logger.log(LogStatus.INFO, "Navigate to Automation Practice");
         driver.navigate().to("http://automationpractice.com");
         Reusable_Actions_Logger.clickMethod(driver,"//*[@class='login']",logger,"Login");
-        Reusable_Actions_Logger.sendKeysMethod(driver,"//*[@id='email_create']","ariful.islam1923@gmail.com",logger,"Email");
+        Reusable_Actions_Logger.sendKeysMethod(driver,"//*[@id='email_create']","ariful.islam3091@gmail.com",logger,"Email");
         Reusable_Actions_Logger.clickMethod(driver,"//*[@id='SubmitCreate']",logger,"Create An Account");
         Reusable_Actions_Logger.clickMethod(driver,"//*[@id='id_gender1']",logger,"Select Male");
         Reusable_Actions_Logger.sendKeysMethod(driver,"//*[@id='customer_firstname']","Ariful",logger,"FirstName");

@@ -34,24 +34,6 @@ public class Reusable_Actions_Logger {
         return driver;
     }//end of webdriver method
 
-    //method to hover on any web element
-    public static void mouseHover(WebDriver driver, String xpath, ExtentTest logger, String elementName) {
-        //declare local explicit wait
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        System.out.println("Hovering on element " + elementName);
-        logger.log(LogStatus.INFO, "Hovering on element " + elementName);
-        try {
-            Actions actions = new Actions(driver);
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            actions.moveToElement(element).perform();
-        } catch (Exception e) {
-            System.out.println("Unable to hover on " + elementName + " Error:" + e);
-            logger.log(LogStatus.FAIL, "Unable to hover on " + elementName + " Error:" + e);
-            getScreenShot(driver,elementName,logger);
-        }
-    }//end of hover method
-
-
     //creating void click method for any web element
     public static void clickMethod(WebDriver driver, String xpath, ExtentTest logger, String elementName) {
         //declare local explicit wait
@@ -63,25 +45,9 @@ public class Reusable_Actions_Logger {
         } catch (Exception e) {
             System.out.println("Unable to click on " + elementName + " Error:" + e);
             logger.log(LogStatus.FAIL, "Unable to click on " + elementName + " Error:" + e);
-            getScreenShot(driver,elementName,logger);
+            getScreenShot(driver, elementName, logger);
         }
     }//end of click method
-
-    //creating void submit method for any web element
-    public static void submitMethod(WebDriver driver, String xpath, ExtentTest logger, String elementName) {
-        //declare local explicit wait
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        System.out.println("Submitting on element " + elementName);
-        logger.log(LogStatus.INFO, "Submitting on element  " + elementName);
-
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath))).submit();
-        } catch (Exception e) {
-            System.out.println("Unable to submit on " + elementName + " Error:" + e);
-            logger.log(LogStatus.FAIL, "Unable to submit on " + elementName + " Error:" + e);
-            getScreenShot(driver,elementName,logger);
-        }
-    }//end of submit method
 
     //creating void sendkeys method for any web element
     public static void sendKeysMethod(WebDriver driver, String xpath, String userData, ExtentTest logger, String elementName) {
@@ -98,73 +64,11 @@ public class Reusable_Actions_Logger {
         } catch (Exception e) {
             System.out.println("Unable to type on " + elementName + " Error:" + e);
             logger.log(LogStatus.FAIL, "Unable to type on " + elementName + " Error:" + e);
-            getScreenShot(driver,elementName,logger);
+            getScreenShot(driver, elementName, logger);
         }
     }//end of click sendKeysMethod
 
-    //creating return getText method for any text web element
-    public static String getTextMethod(WebDriver driver, String xpath, ExtentTest logger, String elementName) {
-        //declare local explicit wait
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        System.out.println("Capturing text on element " + elementName);
-        logger.log(LogStatus.INFO, "Capturing text on element " + elementName);
-        //declare a global variable to capture the text so I can return it
-        String result = null;
-        try {
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            //capture text
-            result = element.getText();
-        } catch (Exception e) {
-            System.out.println("Unable to capture text on " + elementName + " Error:" + e);
-            logger.log(LogStatus.FAIL, "Unable to capture text on  " + elementName + " Error:" + e);
-            getScreenShot(driver,elementName,logger);
-        }
-        return result;
-    }//end of click getTextMethod
 
-    public static void selectMethod(WebDriver driver, String xpath, ExtentTest logger, ExtentTest userData, String elementName) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        System.out.println("Selecting element " + elementName);
-        logger.log(LogStatus.INFO, "Selecting element  " + elementName);
-        try {
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            element.sendKeys((CharSequence) userData);
-        } catch (Exception e) {
-            System.out.println("Unable to select " + elementName + " Error" + e);
-            logger.log(LogStatus.FAIL, "Unable to select " + elementName + " Error:" + e);
-            getScreenShot(driver,elementName,logger);
-        }//End of try
-    }//end of Select by text method
-
-    //selectByVisibleText
-    public static void selectByVisibleText(WebDriver driver, String xpath, String userData, ExtentTest logger, String elementName) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        System.out.println("Selecting value " + userData + " from element " + elementName);
-        logger.log(LogStatus.INFO, "Selecting visible " + elementName);
-        try {
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            Select dDown = new Select(element);
-            dDown.selectByVisibleText(String.valueOf(userData));
-        } catch (Exception e) {
-            System.out.println("Unable to select the visible text " + elementName + " Error:" + e);
-            logger.log(LogStatus.FAIL, "Unable to select visible text " + elementName + " Error:" + e);
-            getScreenShot(driver,elementName,logger);
-        }//End of try
-    }//end of Select by visible text method
-
-    //click on element using explicit wait with index
-    public static void clickByIndex(WebDriver driver, String xpath, int indexNumber, ExtentTest logger, String elementName) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        System.out.println("Clicking by index " + elementName);
-        logger.log(LogStatus.INFO, "Clicking by index element " + elementName);
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath))).get(indexNumber).click();
-        } catch (Exception e) {
-            System.out.println("Unable to click on element " + elementName + " Error:" + e);
-            logger.log(LogStatus.FAIL, "Unable to click by index " + elementName + " Error:" + e);
-            getScreenShot(driver,elementName,logger);
-        }//End of try
-    }//end of click method
     public static void getScreenShot(WebDriver driver, String imageName, ExtentTest logger) {
         try {
             String fileName = imageName + ".png";
@@ -183,14 +87,5 @@ public class Reusable_Actions_Logger {
         }//end of catch
     }//end of getScreenshot method
 
-    public static String getDateTime() {
-        SimpleDateFormat sdfDateTime;
-        String strDateTime;
-        sdfDateTime = new SimpleDateFormat("yyyyMMdd'_'HHmmss'_'SSS");
-        Date now = new Date();
-        strDateTime = sdfDateTime.format(now);
-        return strDateTime;
-    }
 }
-
 
